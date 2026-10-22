@@ -1,41 +1,72 @@
-import { useState } from 'react'
-import takImg from './assets/tak.jpg'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
+import takImg from './assets/tak.jpg'
+import Header from './components/Header.jsx'
+import Navbar from './components/Navbar.jsx'
+import StudentCard from './components/StudentCard.jsx'
+import Footer from './components/Footer.jsx'
 
+const etudiants = [
+  {
+    prenom: "Takoua",
+    nom: "Dhahak",
+    email: "dhahaktakwa5@gmail.com",
+    telephone: "29192252",
+    filiere: "Genie Logiciel et Systeme d'Informatique",
+    anneeEtude: "2026/2027",
+    groupe: "GLSI 2",
+    ville: "Mahdia",
+    image: takImg,
+  },
+  {
+    prenom: "Slim",
+    nom: "Boubaker",
+    email: "slimboubaker@gmail.com",
+    telephone: "+216 99 999 999",
+    filiere: "Génie Logiciel et Systèmes d'Information",
+    anneeEtude: "2ème année",
+    groupe: "GLSI 2",
+    ville: "Mahdia",
+    image: takImg,
+  },
+  {
+    prenom: "Sarra",
+    nom: "Trabelsi",
+    email: "sarra.trabelsi@gmail.com",
+    telephone: "+216 22 345 678",
+    filiere: "Génie Logiciel et Systèmes d'Information",
+    anneeEtude: "2ème année",
+    groupe: "GLSI 1",
+    ville: "Sousse",
+    image: takImg,
+  }
+];
 
 function App() {
-  //const [count, setCount] = useState(0)
-  const etudiant = {
-    nom:"Dhahak",
-    prenom:"Takoua",
-    email:"dhahaktakwa5@gmail.com",
-    tel:"29192252",
-    filiere:"Genie Logiciel et Systeme d'Informatique",
-    anne:"2026/2027",
-    grp:"Glsi2b",
-    ville:"Mahdia",
-  };
   return (
-  
-<div className="motif">
+    <div className="container">
+      <Header />
+      <Navbar />
+      
+      <main className="student-list">
+        {etudiants.map((etudiant) => (
+          <StudentCard
+            key={etudiant.email}
+            prenom={etudiant.prenom}
+            nom={etudiant.nom}
+            email={etudiant.email}
+            telephone={etudiant.telephone}
+            filiere={etudiant.filiere}
+            anneeEtude={etudiant.anneeEtude}
+            groupe={etudiant.groupe}
+            ville={etudiant.ville}
+            image={etudiant.image}
+          />
+        ))}
+      </main>
 
-<img src={takImg} alt="Photo de Dhahak Takwa" />
-<h1>Fiche etudiant</h1>
-<p><strong>Nom & Prenom:</strong>{etudiant.nom}</p>
-<p><strong>Email:</strong> {etudiant.email}</p>
-<p><strong>Téléphone:</strong> {etudiant.tel}</p>
-<p><strong>Filière:</strong> {etudiant.filiere}</p>
-<p><strong>Année d'étude:</strong> {etudiant.anne}</p>
-<p><strong>Groupe:</strong> {etudiant.grp}</p>
-<p><strong>Ville:</strong> {etudaint.ville}</p>
-<button onClick={() => window.location.href = "mailto:${etudiant.email}"}>
-  Contacter
-</button>
-</div>
-
-  )
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;
