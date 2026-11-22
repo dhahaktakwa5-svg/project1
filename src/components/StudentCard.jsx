@@ -1,24 +1,61 @@
+import './StudentCard.css'
 import { useState } from 'react'
-import takImg from './assets/tak.jpg'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
 
+function StudentCard({ etudiant, onDelete, onEdit }) {
+  const [coordonneesVisibles, setCoordonneesVisibles] = useState(false)
 
-function StudentCard(props) {
+  const basculerInformation = () => {
+    setCoordonneesVisibles(!coordonneesVisibles)
+  }
+
   return (
-    <div className="motif">
-      <img src={props.image} alt="Photo de l'étudiant" />
-      <h1>Fiche etudiant</h1>
-      <p><strong>Nom & Prénom:</strong> {props.prenom} {props.nom}</p>
-      <p>Email: {props.email}</p>
-      <p>Téléphone: {props.Tel}</p>
-      <p>Filière: {props.filiere}</p>
-      <p>Année: {props.Annee}</p>
-      <p>Groupe: {props.Groupe}</p>
-      <p>Ville: {props.ville}</p>
+    <div className="student-card">
+
+      <img
+        src={etudiant.image}
+        alt="Photo étudiant"
+        className="student-image"
+      />
+
+      <h2>
+        {etudiant.prenom} {etudiant.nom}
+      </h2>
+
+      <p>Filière : {etudiant.filiere}</p>
+      <p>Année : {etudiant.anneeEtude}</p>
+      <p>Groupe : {etudiant.groupe}</p>
+      <p>Ville : {etudiant.ville}</p>
+
+      {coordonneesVisibles && (
+        <div>
+          <p>Email : {etudiant.email}</p>
+          <p>Téléphone : {etudiant.telephone}</p>
+        </div>
+      )}
+
+      <button
+        className="info-button"
+        onClick={basculerInformation}
+      >
+        {coordonneesVisibles
+          ? 'Masquer les informations'
+          : 'Afficher les informations'}
+      </button>
+
+      <div className="buttons">
+
+        <button onClick={() => onEdit(etudiant)}>
+          Modifier
+        </button>
+
+        <button onClick={() => onDelete(etudiant.id)}>
+          Supprimer
+        </button>
+
+      </div>
+
     </div>
-  );
+  )
 }
 
-export default StudentCard;
+export default StudentCard
